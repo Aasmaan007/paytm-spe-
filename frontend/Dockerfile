@@ -13,9 +13,9 @@ RUN npm install
 # Copy all project files
 COPY . .
 
-# Pass environment variables at build time
-ARG VITE_SERVER_URL
-ENV VITE_SERVER_URL=$VITE_SERVER_URL
+# # Pass environment variables at build time
+# ARG VITE_SERVER_URL
+# ENV VITE_SERVER_URL=$VITE_SERVER_URL
 
 # Build the app
 RUN npm run build

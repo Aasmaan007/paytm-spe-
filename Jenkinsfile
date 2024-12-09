@@ -2,7 +2,6 @@ pipeline {
     environment {
         backend = 'backend'  // Backend Docker image name
         frontend = 'frontend'  // Frontend Docker image name
-        docker_image = ''  // Placeholder
     }
 
     agent any
@@ -11,7 +10,7 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 echo 'Cloning the Git repository...'
-                git branch: 'main', url: 'https://github.com/your-username/your-repo.git'
+                git branch: 'main', url: 'https://github.com/Aasmaan007/paytm-spe-.git'
             }
         }
 
@@ -19,7 +18,9 @@ pipeline {
             steps {
                 echo 'Building backend Docker image...'
                 dir('backend') {
-                    sh "docker build -t your_dockerhub_username/${backend} ."
+                    script {
+                        docker.build("aasmaan1/${backend}")
+                    }
                 }
             }
         }
@@ -28,18 +29,23 @@ pipeline {
             steps {
                 echo 'Building frontend Docker image...'
                 dir('frontend') {
-                    sh "docker build -t your_dockerhub_username/${frontend} ."
+                    script {
+                        docker.build("aasmaan1/${frontend}")
+                    }
                 }
             }
         }
 
-        stage('Push Docker Images to DockerHub') {
+       stage('Push Docker Images to DockerHub') {
             steps {
                 echo 'Pushing Docker images to DockerHub...'
                 script {
-                    docker.withRegistry('', 'DockerHubCred') {
-                        sh "docker push your_dockerhub_username/${backend}"
-                        sh "docker push your_dockerhub_username/${frontend}"
+                    // Docker login using credentials
+                    withDockerRegistry([ credentialsId: 'DockerHubCred', url: 'https://index.docker.io/v1/' ]) {
+                        // Push the backend image to DockerHub
+                        docker.image("aasmaan1/${backend}").push()
+                        // Push the frontend image to DockerHub
+                        docker.image("aasmaan1/${frontend}").push()
                     }
                 }
             }
