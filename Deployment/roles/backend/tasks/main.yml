@@ -1,16 +1,17 @@
 ---
 - name: Create backend environment file dynamically
-  shell: echo MONGO_URI={{ db_url }} > ../backend/.env
+  shell: echo MONGO_URI={{ db_url }} > /home/aasmaan/Desktop/WebDevH/paytm/backend/.env  # Absolute path to backend .env
   args:
-    chdir: "{{ playbook_dir }}"  # Use playbook directory as the starting point
+    chdir: "{{ playbook_dir }}"  # Ensure correct directory is used to run shell command
 
 - name: Build backend Docker image
   docker_image:
     build:
-      path: ../../../../backend 
+      path: /home/aasmaan/Desktop/WebDevH/paytm/backend  # Absolute path to the backend directory
     name: aasmaan1/backend
     tag: latest
   when: build_backend | default(true)
+  become: yes  # Use sudo if needed
 
 - name: Push backend Docker image to DockerHub
   docker_image:
@@ -18,3 +19,4 @@
     tag: latest
     push: yes
   when: build_backend | default(true)
+  become: yes  # Use sudo if needed

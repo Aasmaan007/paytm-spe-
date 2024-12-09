@@ -2,7 +2,7 @@
 - name: Build frontend Docker image
   docker_image:
     build:
-       path: ../../../../frontend  
+      path: /home/aasmaan/Desktop/WebDevH/paytm/frontend  # Absolute path to the frontend directory
     name: aasmaan1/frontend
     tag: latest
   when: build_frontend | default(true)
