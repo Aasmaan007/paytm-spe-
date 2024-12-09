@@ -8,9 +8,11 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 export const Signin = () => {
+  // console.log(import.meta.env.VITE_SERVER_URL || 'Env variable not found');
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+ 
 
   useEffect(() => {
     const userToken = localStorage.getItem("token");
@@ -44,8 +46,9 @@ export const Signin = () => {
           <div className="pt-4">
             <Button
               onClick={async () => {
+                console.log("hehe")
                 const response = await axios.post(
-                  import.meta.env.VITE_SERVER_URL + "/api/v1/user/signin",
+                  "http://localhost:3000" + "/api/v1/user/signin",
                   {
                     username,
                     password,
