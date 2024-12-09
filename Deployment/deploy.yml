@@ -1,0 +1,22 @@
+---
+- name: Deploy Docker Containers
+  hosts: localhost
+
+  vars_files:
+    - secrets.yml  # Load encrypted variables (contains db_url)
+
+  tasks:
+    - name: Create backend environment file dynamically
+      shell: echo MONGO_URI={{ db_url }} > ../backend/.env
+      args:
+        chdir: "{{ playbook_dir }}"  # Use playbook directory as the starting point
+
+    - name: Pull Docker images
+      shell: docker-compose pull
+      args:
+        chdir: "{{ playbook_dir }}"  # Use playbook directory for Docker Compose
+
+    - name: Start Docker containers
+      shell: docker-compose up -d
+      args:
+        chdir: "{{ playbook_dir }}"  # Use playbook directory for Docker Compose
