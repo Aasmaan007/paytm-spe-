@@ -5,6 +5,7 @@ const connectToDatabase = async () => {
     try {
         const mongoURI = process.env.MONGO_URI; // Fetch MongoDB URI from .envconst mongoURI = mongodb+srv://admin:iQSZvFQqxVmMeO8o@cluster0.mongodb.net/paytm
         // const mongoURI = "mongodb+srv://admin:iQSZvFQqxVmMeO8o@cluster0.3bg9h.mongodb.net/paytm"
+        console.log(mongoURI)
         if (!mongoURI) {
             throw new Error("MongoDB URI not found in environment variables");
         }

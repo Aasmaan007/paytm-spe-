@@ -1,0 +1,15 @@
+---
+- name: Build frontend Docker image
+  docker_image:
+    build:
+      path: ../frontend
+    name: aasmaan1/frontend
+    tag: latest
+  when: build_frontend | default(true)
+
+- name: Push frontend Docker image to DockerHub
+  docker_image:
+    name: aasmaan1/frontend
+    tag: latest
+    push: yes
+  when: build_frontend | default(true)

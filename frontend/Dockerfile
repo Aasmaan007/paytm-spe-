@@ -4,8 +4,6 @@ FROM node:16 as build
 # Set the working directory
 WORKDIR /app
 
-# Define build-time argument for VITE_SERVER_URL (this will be passed at build time)
-ARG VITE_SERVER_URL
 
 # Copy package.json and package-lock.json
 COPY package*.json ./
@@ -18,7 +16,6 @@ COPY . .
 
 # Set the environment variable for build time
 # This will allow React to use the correct backend URL during the build
-ENV VITE_SERVER_URL=$VITE_SERVER_URL
 
 # Build the app (using the .env file copied earlier)
 RUN npm run build

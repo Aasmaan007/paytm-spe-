@@ -63,6 +63,7 @@ router.post("/signup", async (req, res) => {
 // Signin Route
 router.post("/signin", async (req, res) => {
     const result = signinBody.safeParse(req.body);
+    console.log("what is happening")
     if (!result.success) {
         const errors = result.error.errors.map(err => err.message);
         return res.status(400).json({

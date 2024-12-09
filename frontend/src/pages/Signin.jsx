@@ -11,6 +11,7 @@ export const Signin = () => {
   // console.log(import.meta.env.VITE_SERVER_URL || 'Env variable not found');
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  console.log(username);
   const navigate = useNavigate();
  
 
