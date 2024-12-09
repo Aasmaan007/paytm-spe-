@@ -19,17 +19,19 @@
           path: ../backend  # Absolute path to backend directory
         name: aasmaan1/backend
         tag: latest
+        push: yes
+        source: build
       when: build_backend | default(true)
       become: yes  # Use sudo if needed
 
-    # 3. Push backend Docker image to DockerHub
-    - name: Push backend Docker image to DockerHub
-      docker_image:
-        name: aasmaan1/backend
-        tag: latest
-        push: yes
-      when: build_backend | default(true)
-      become: yes  # Use sudo if needed
+    # # 3. Push backend Docker image to DockerHub
+    # - name: Push backend Docker image to DockerHub
+    #   docker_image:
+    #     name: aasmaan1/backend
+    #     tag: latest
+    #     push: yes
+    #   when: build_backend | default(true)
+    #   become: yes  # Use sudo if needed
 
     # 5. Build frontend Docker image
     - name: Build frontend Docker image
@@ -38,17 +40,19 @@
           path: ../frontend  # Absolute path to frontend directory
         name: aasmaan1/frontend
         tag: latest
+        push: yes
+        source: build
       when: build_frontend | default(true)
       become: yes  # Use sudo if needed
 
-    # 6. Push frontend Docker image to DockerHub
-    - name: Push frontend Docker image to DockerHub
-      docker_image:
-        name: aasmaan1/frontend
-        tag: latest
-        push: yes
-      when: build_frontend | default(true)
-      become: yes  # Use sudo if needed
+    # # 6. Push frontend Docker image to DockerHub
+    # - name: Push frontend Docker image to DockerHub
+    #   docker_image:
+    #     name: aasmaan1/frontend
+    #     tag: latest
+    #     push: yes
+    #   when: build_frontend | default(true)
+    #   become: yes  # Use sudo if needed
 
     # 7. Pull Docker images (from DockerHub)
     - name: Pull Docker images (from DockerHub)
