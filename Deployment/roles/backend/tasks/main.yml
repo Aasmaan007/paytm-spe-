@@ -7,7 +7,7 @@
 - name: Build backend Docker image
   docker_image:
     build:
-      path: ../backend
+      path: ../../../../backend 
     name: aasmaan1/backend
     tag: latest
   when: build_backend | default(true)
